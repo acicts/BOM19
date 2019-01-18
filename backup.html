@@ -1,0 +1,28 @@
+<!doctype html>
+<html ng-app>
+	<head>
+   	<link href="vendor/css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/services.js"></script>
+	<script>
+		function backup(){
+			window.location = "http://bom2015master.cloudapp.net:3700/backup";
+		}
+
+		function backupA(stop)
+		{
+			if(stop) clearTimeout(getfile);
+			else {
+				getfile = setTimeout(function(){window.location = "http://bom2015master.cloudapp.net:3700/backup"; backupA(false);},30000);
+			}
+		}
+	
+	</script>
+  </head>
+  <body>
+	<div class="container-fluid">
+	<button type="button" class="btn btn-primary" onClick="backup()">BACKUP</button>
+	<button type="button" class="btn btn-primary" onClick="backupA(false)">BACKUP [automatic - recursive]</button>
+	<button type="button" class="btn btn-primary" onClick="backupA(true)">Stop automatic Backup</button>
+	</div>
+  </body>
+</html>

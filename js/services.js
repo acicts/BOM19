@@ -1,10 +1,10 @@
-
+  // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyCLwvBTSAWNDeSy1LufmmEn-L0H0MAsGRc",
-    authDomain: "battle-of-the-maroons-live.firebaseapp.com",
-    databaseURL: "https://battle-of-the-maroons-live.firebaseio.com",
-    projectId: "battle-of-the-maroons-live",
-    storageBucket: "battle-of-the-maroons-live.appspot.com",
-    messagingSenderId: "343934443161"
+    apiKey: "AIzaSyD6H9F-bA49Jw0EyAuWDkvijG5795WpY10",
+    authDomain: "bom19-e3ac3.firebaseapp.com",
+    databaseURL: "https://bom19-e3ac3.firebaseio.com",
+    projectId: "bom19-e3ac3",
+    storageBucket: "bom19-e3ac3.appspot.com",
+    messagingSenderId: "668983720794"
   };
   firebase.initializeApp(config);

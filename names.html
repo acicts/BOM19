@@ -1,0 +1,41 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
+    <script src="vendor/angular.min.js"></script>
+    <script src="vendor/socket.io.js"></script>
+    <script src="js/names.js"></script>
+    <script src="js/services.js"></script>
+    
+  </head>
+  <body ng-controller="TodoCtrl">
+    <datalist id="schools">
+    <option value="Ananda"></option>
+    <option value="Nalanda"></option>
+    </datalist>
+    <div class="container-fluid">
+      <h2>Players</h2>
+      <div class="alert alert-danger">NOTE: UPDATING THE SERVER WILL RESET EVERY THING. (INCLUDING THE SCORE AND BLAH BLAH)</div>
+      <div>
+        [ <a href="" ng-click="clean()">Remove selected</a> ]
+        <ul class="unstyled">
+          <li ng-repeat="player in players">
+            <input type="checkbox" ng-model="player.remove">
+            <span class="player">{{player.name}} -> {{player.school}}</span>
+          </li>
+        </ul>
+        <form ng-submit="addPlayer()">
+          <input type="text" ng-model="playerName"  size="30"
+          placeholder="player name">
+          <input list="schools"  ng-model="playerSchool"  size="30"
+          placeholder="player school">
+          <input class="btn-primary" type="submit" value="add">
+        </form>
+      </div>
+      <br><br><br>
+      <form ng-submit="updateServer()">
+        <input class="btn-primary" type="submit" value="update server">
+      </form>
+    </div>
+  </body>
+</html>

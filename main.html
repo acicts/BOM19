@@ -1,0 +1,178 @@
+<!doctype HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Bigmatch Scoreboard Admin Panel</title>
+        <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">              
+        <script src="js/services.js"></script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="page-header">
+                    <h1>Admin Panel
+                    <small>Main Controller</small>
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="container-fluid">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <form class="container-fluid">
+                                        <div class="col">
+                                            <button id="pin1" class="btn btn-info" onclick="update.setPanelIn(0)">Inning 1</button>
+                                            <button id="pin2" class="btn btn-info" onclick="update.setPanelIn(1)">Inning 2</button>
+                                            <button id="pin3" class="btn btn-info" onclick="update.setPanelIn(2)">Inning 3</button>
+                                            <button id="pin4" class="btn btn-info" onclick="update.setPanelIn(3)">Inning 4</button>
+                                            <button id="pod1" class="btn btn-info" onclick="update.setPanelIn(4)">One Day 1</button>
+                                            <button id="pod1" class="btn btn-info" onclick="update.setPanelIn(5)">One Day 1</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="container-fluid">
+                                        <font style="width:80px;display:inline-block;">Wides:</font>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success" onclick="update.addWides(+1)">+1</button>
+                                            <button type="button" class="btn btn-warning" onclick="update.addWides(-1)">-1</button>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <font style="width:80px;display:inline-block;">Noballs:</font>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success" onclick="update.addNoBalls(+1)">+1</button>
+                                            <button type="button" class="btn btn-warning" onclick="update.addNoBalls(-1)">-1</button>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <font style="width:80px;display:inline-block;">Byes:</font>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success" onclick="update.addBuys(+1)">+1</button>
+                                            <button type="button" class="btn btn-success" onclick="update.addBuys(+2)">+2</button>
+                                            <button type="button" class="btn btn-success" onclick="update.addBuys(+3)">+3</button>
+                                            <button type="button" class="btn btn-success" onclick="update.addBuys(+4)">+4</button>
+                                            <button type="button" class="btn btn-success" onclick="update.addBuys(+5)">+5</button>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-warning" onclick="update.addBuys(-1)">-1</button>
+                                            <button type="button" class="btn btn-warning" onclick="update.addBuys(-2)">-2</button>
+                                            <button type="button" class="btn btn-warning" onclick="update.addBuys(-3)">-3</button>
+                                            <button type="button" class="btn btn-warning" onclick="update.addBuys(-4)">-4</button>
+                                            <button type="button" class="btn btn-warning" onclick="update.addBuys(-5)">-5</button>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <font style="width:80px;display:inline-block;">Leg Byes:</font>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success" onclick="update.addLegBuys(+1)">+1</button>
+                                            <button type="button" class="btn btn-warning" onclick="update.addLegBuys(-1)">-1</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Status</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-2">Completed:</div>
+                                <div class="col-xs-4">
+                                    <button id="in1">Inning 1</button>
+                                    <button id="in2">Inning 2</button>
+                                    <button id="in3">Inning 3</button>
+                                    <button id="in4">Inning 4</button>
+                                    <button id="od1">One Day 1</button>
+                                    <button id="od2">One Day 2</button>
+                                </div>
+                                <div class="col-xs-2">Current:</div>
+                                <div class="col-xs-4">
+                                    <button id="cin1" class="btn btn-primary">Inning 1</button>
+                                    <button id="cin2" class="btn btn-primary">Inning 2</button>
+                                    <button id="cin3" class="btn btn-primary">Inning 3</button>
+                                    <button id="cin4" class="btn btn-primary">Inning 4</button>
+                                    <button id="cod1" class="btn btn-primary">One Day 1</button>
+                                    <button id="cod2" class="btn btn-primary">One Day 2</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Schools</div>
+                        <div class="panel-body">
+                        </div>
+                        <table class="table table-stripped">
+                            <tr>
+                                <td class="active">Inning 1</td>
+                                <td>
+                                    <button id="battingin1A">Ananda</button>
+                                </td>
+                                <td>
+                                    <button id="battingin1N">Nalanda</button>
+                                </td>                                
+                            </tr>
+                            <tr>
+                                <td class="active">Inning 2</td>
+                                <td>
+                                    <button id="battingin2A">Ananda</button>
+                                </td>
+                                <td>
+                                    <button id="battingin2N">Nalanda</button>
+                                </td>                                 
+                            </tr>
+                            <tr>
+                                <td class="active">Inning 3</td>
+                                <td>
+                                    <button id="battingin3A">Ananda</button>
+                                </td>
+                                <td>
+                                    <button id="battingin3N">Nalanda</button>
+                                </td>                                 
+                            </tr>
+                            <tr>
+                                <td class="active">Inning 4</td>
+                                <td>
+                                    <button id="battingin4A">Ananda</button>
+                                </td>
+                                <td>
+                                    <button id="battingin4N">Nalanda</button>
+                                </td>                                 
+                            </tr>
+                            <tr>
+                                <td class="active">Oneday 1</td>
+                                <td>
+                                    <button id="battingod1A">Ananda</button>
+                                </td>
+                                <td>
+                                    <button id="battingod1N">Nalanda</button>
+                                </td>                                 
+                            </tr>
+                            <tr>
+                                <td class="active">Oneday 2</td>
+                                <td>
+                                    <button id="battingod2A">Ananda</button>
+                                </td>
+                                <td>
+                                    <button id="battingod2N">Nalanda</button>
+                                </td>                                 
+                            </tr>
+                        </table>
+                        <div class="panel-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/main.js"></script>
+    </body>
+</html>

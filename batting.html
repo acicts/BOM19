@@ -1,0 +1,150 @@
+<!doctype HTML>
+<html lang="en" ng-app="bomAdmin">
+    <head>
+        <meta charset="utf-8">
+        <title>Bigmatch Scoreboard Admin Panel</title>
+        <link rel="stylesheet" href="vendor/css/bootstrap.css">
+        <script src="vendor/socket.io.js"></script>
+        <script src="vendor/jquery.min.js"></script>
+        <script src="vendor/bootstrap.min.js"></script>
+        <script src="vendor/angular.min.js"></script>
+        
+        <script src="js/services.js"></script>
+        <script src="js/batting.js"></script>
+    </head>
+    <body ng-controller='ctrl'>
+        <datalist id="types">
+        <option ng-repeat="type in types" value="{{type}}"></option>
+        </datalist>
+        <datalist id="schools">
+        <option value="Ananda"></option>
+        <option value="Nalanda"></option>
+        </datalist>
+        <datalist id="names">
+        <option ng-repeat="player in players | filter:schoolFilter:strict" value="{{player.name}}"></option>
+        </datalist>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="page-header">
+                    <h1>Admin Panel
+                    <small>Batting Controller</small>
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    
+                    <div class="container-fluid" ng-repeat="control in controlSet">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <form class="container-fluid" ng-submit="control.updateMain()">
+                                        <div class="col-xs-10">
+                                            <input list="names" class="form-control" name="player" placeholder="Name" ng-model="control.name">
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="submit" class="btn btn-default">Update/ Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <button type="button" class="btn btn-info" ng-click="control.batting=!control.batting">Batting: {{control.batting && 't' || 'f'}}</button>
+                                                <button type="button" class="btn btn-info" ng-click="control.inTheField=!control.inTheField">In the Field: {{control.inTheField && 't' || 'f'}}</button>
+                                            </div>
+                                            <br/>
+                                            <div class="row">
+                                                <button type="button" class="btn btn-info">Auto-update balls: true</button>
+                                            </div>
+                                            <br/>
+                                            <div class="row">
+                                                <button type="button" class="btn btn-danger" ng-click="control.batting=false; control.inTheField=false">Knockout</button>
+                                                <button type="button" class="btn btn-primary" ng-click="control.index=-1; control.name=''; control.order=''">Clean</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        Score:
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success" ng-click="control.score=control.score+1">+1</button>
+                                            <button type="button" class="btn btn-success" ng-click="control.score=control.score+2">+2</button>
+                                            <button type="button" class="btn btn-success" ng-click="control.score=control.score+4">+4</button>
+                                            <button type="button" class="btn btn-success" ng-click="control.score=control.score+6">+6</button>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-warning" ng-click="control.score=control.score-1">-1</button>
+                                            <button type="button" class="btn btn-warning" ng-click="control.score=control.score-2">-2</button>
+                                            <button type="button" class="btn btn-warning" ng-click="control.score=control.score-4">-4</button>
+                                            <button type="button" class="btn btn-warning" ng-click="control.score=control.score-6">-6</button>
+                                        </div>
+                                        <br>
+                                        <br>Bowls:
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success" ng-click="control.balls=control.balls+1">+1</button>
+                                            <button type="button" class="btn btn-warning" ng-click="control.balls=control.balls-1">-1</button>
+                                        </div>
+                                        <br><br>
+                                        <p class="form form-inline">
+                                        Order:
+                                        <input type="text" class="form-control" name="player" placeholder="Order" ng-model="control.order">
+                                        </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="container-fluid">
+                        <form class="form-inline">
+                            <input list="names" class="form-control" name="player" placeholder="Name" ng-model="toRemove.name">
+                            <input list="types" class="form-control" name="type" placeholder="Type" ng-model="toRemove.type">
+                            <button type="button" class="btn btn-danger" ng-click="processRemove()">Remove</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input list="types" class="form-control" name="type" placeholder="Type" ng-model="typeFilter.ID">
+                            </div>
+                            <div class="col-md-6">
+                                <input list="schools" class="form-control" name="school" placeholder="School" ng-model="schoolFilter.school">
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Output</div>
+                        <table class="table">
+                            <tr>
+                                <th>ID</th>
+                                <th>playerID</th>
+                                <th>Score</th>
+                                <th>Balls</th>
+                                <th>batting</th>
+                                <th>intheField</th>
+                            </tr>
+                            <tr ng-repeat="curData in dataset | filter:typeFilter:strict | orderBy:order track by $index">
+                                <td>{{curData.ID}}</td>
+                                <td>{{players[curData.playerID].name}}</td>
+                                <td>{{curData.score}}</td>
+                                <td>{{curData.balls}}</td>
+                                <td>{{curData.batting}}</td>
+                                <td>{{curData.inTheField}}</td>
+                            </tr>
+                        </table>
+                        <div class="panel-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
