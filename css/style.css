@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono|ZCOOL+QingKe+HuangYou');
-
 * {
     box-sizing: border-box;
 }
@@ -24,14 +23,14 @@ body {
     color: white;
     text-align: center;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 20px;
     text-decoration: none;
     font-size: 25px;
     font-family: 'ZCOOL QingKe HuangYou', cursive;
     line-height: 25px;
     border-radius: 2px;
-    -webkit-transition: color,background-color 1s; 
-    transition: color,background-color 1s;
+    -webkit-transition: color, background-color 1s;
+    transition: color, background-color 1s;
 }
 
 .header a.logo {
@@ -56,10 +55,23 @@ body {
 }
 
 @media screen and (max-width: 500px) {
+    .header {
+        overflow: hidden;
+        height: 74.8px;
+    }
+    .header:hover {
+        height: 259.2px;
+    }
+    .header:active {
+        height: 259.2px;
+    }
     .header a {
         float: none;
         display: block;
         text-align: left;
+    }
+    #first {
+        margin-top: 20px;
     }
     .header-right {
         float: none;
@@ -70,7 +82,7 @@ body {
     margin-top: 100px;
 }
 
-.row {
+.col {
     margin-left: 20px;
 }
 
@@ -79,11 +91,11 @@ body {
     font-size: 15px !important;
 }
 
-pre{
-    color: white  !important;
+pre {
+    color: white !important;
 }
 
-.btn-primary{
+.btn-primary {
     background-color: #8b6909 !important;
     border-color: #d39e00 !important;
 }
