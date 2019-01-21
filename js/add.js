@@ -7,8 +7,9 @@ var player = {
   update: function(){
     
   },
-  delete: function(){
-
+  delete: function(id){
+    var ref = db.ref('players/' + id);
+    ref.remove();
   }
 }
 
@@ -38,20 +39,33 @@ playerRef.on('value', snap => {
   var arr = snap.val();
   var len = Object.keys(arr).length;
   var dp = "  ";
-  for(var i in arr){
+  for(let i in arr){
+    dp += '<div class="card" style="width: 18rem;">';
+    dp += '<div class="card-body">';
+    dp += '<h5 class="card-title">';
     dp += i;
-    dp += '<br><ul>';
+    dp += '</h5>'
     var c = arr[i];
-    for(var j in arr[i]){
-      dp += "<li>";
+    for(let j in arr[i]){
+      dp += '<p color="black">';
       dp += j;
       dp += ":";
       dp += JSON.stringify(arr[i][j]);
-      dp += "</li>";
+      dp += "</p>";
     }
     //dp += JSON.stringify(arr[i]);
-    dp += '</ul><br>';
+    dp += '<input type="button" onclick="del(';
+    dp += "'"+i.toString()+"'";
+    dp += ')" value="Delete" class="btn btn-primary">';
+    dp += '</div></div>';
   }
+
+  
   
   display.innerHTML = dp;
 });
+
+function del(id){
+  var ref = playerRef.child(id);
+  ref.remove();
+}
