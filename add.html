@@ -1,34 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
   <script src="js/services.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
   <title>Add Player</title>
 </head>
+
 <body>
+  <div class="header">
+    <a class="logo">BOM 2019 Admin Panel</a>
+    <div class="header-right">
+      <a class="active" href="" id="first">Add</a>
+      <a href="">Batting</a>
+      <a href="">Bowling</a>
+    </div>
+  </div>
   <div class="row">
     <div class="col">
-            <div class="form-group">
-              <label for="player">Name:</label>
-              <input type="text" class="form-control" id="player">
-            </div>
-            <div class="form-group">
-                <label for="sel1">School:</label>
-                <select class="form-control" id="school">
-                  <option>Ananda</option>
-                  <option>Nalanda</option>
-                </select>
-            </div>
-            <input type="button" onclick="addOne()" value="add" class="btn btn-primary">
+      <div class="form-group" id="firstrow">
+        <label for="player">Name:</label>
+        <input type="text" class="form-control" id="player">
+      </div>
+      <div class="form-group">
+        <label for="sel1">School:</label>
+        <select class="form-control" id="school">
+          <option>Ananda</option>
+          <option>Nalanda</option>
+        </select>
+      </div>
+      <input type="button" onclick="addOne()" value="Add" class="btn btn-primary">
     </div>
+
     <div class="col">
+      <div class="form-group" id="firstrow">
+        <label for="sel1">ID :</label>
+        <pre id="playerid"></pre>
+      </div>
+      <input type="button" onclick="deleteOne()" value="Delete" class="btn btn-primary">
+    </div>
+
+    <div class="col" id="firstrow">
       <pre id="players"></pre>
     </div>
   </div>
 </body>
 <script type="text/javascript" src="js/add.js"></script>
+
 </html>

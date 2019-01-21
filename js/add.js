@@ -54,18 +54,10 @@ playerRef.on('value', snap => {
       dp += "</p>";
     }
     //dp += JSON.stringify(arr[i]);
-    dp += '<input type="button" onclick="del(';
+    dp += '<input type="button" onclick="player.delete(';
     dp += "'"+i.toString()+"'";
     dp += ')" value="Delete" class="btn btn-primary">';
     dp += '</div></div>';
   }
-
-  
-  
   display.innerHTML = dp;
 });
-
-function del(id){
-  var ref = playerRef.child(id);
-  ref.remove();
-}
