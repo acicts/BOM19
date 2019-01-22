@@ -22,25 +22,54 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="row">
-                                    <form class="container-fluid">
-                                        <div class="col">
-                                            <button id="pin1" class="btn btn-info" onclick="update.setPanelIn(0)">Inning 1</button>
-                                            <button id="pin2" class="btn btn-info" onclick="update.setPanelIn(1)">Inning 2</button>
-                                            <button id="pin3" class="btn btn-info" onclick="update.setPanelIn(2)">Inning 3</button>
-                                            <button id="pin4" class="btn btn-info" onclick="update.setPanelIn(3)">Inning 4</button>
-                                            <button id="pod1" class="btn btn-info" onclick="update.setPanelIn(4)">One Day 1</button>
-                                            <button id="pod1" class="btn btn-info" onclick="update.setPanelIn(5)">One Day 1</button>
+                                    <div class="col">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="in" id="in1" value="in1">
+                                            <label class="form-check-label" for="in1">
+                                                Inning 1
+                                            </label>
                                         </div>
-                                    </form>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="in" id="in2" value="in2">
+                                            <label class="form-check-label" for="in2">
+                                                Inning 2
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="in" id="in3" value="in3">
+                                            <label class="form-check-label" for="in3">
+                                                Inning 3
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="in" id="in4" value="in4">
+                                            <label class="form-check-label" for="in4">
+                                                Inning 4
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="in" id="od1" value="od1">
+                                            <label class="form-check-label" for="od1">
+                                                One Day 1
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="in" id="od2" value="od2">
+                                            <label class="form-check-label" for="od2">
+                                                One Day 2
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <hr>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="container-fluid">
                                         <font style="width:80px;display:inline-block;">Wides:</font>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-success" onclick="update.addWides(+1)">+1</button>
-                                            <button type="button" class="btn btn-warning" onclick="update.addWides(-1)">-1</button>
+                                            <button type="button" class="btn btn-success" onclick="addWides(+1)">+1</button>
+                                            <button type="button" class="btn btn-warning" onclick="addWides(-1)">-1</button>
                                         </div>
                                         <br>
                                         <br>
@@ -85,23 +114,14 @@
                         <div class="panel-heading">Status</div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-xs-2">Completed:</div>
-                                <div class="col-xs-4">
+                                <div class="col">Completed:</div>
+                                <div class="col">
                                     <button id="in1">Inning 1</button>
                                     <button id="in2">Inning 2</button>
                                     <button id="in3">Inning 3</button>
                                     <button id="in4">Inning 4</button>
                                     <button id="od1">One Day 1</button>
                                     <button id="od2">One Day 2</button>
-                                </div>
-                                <div class="col-xs-2">Current:</div>
-                                <div class="col-xs-4">
-                                    <button id="cin1" class="btn btn-primary">Inning 1</button>
-                                    <button id="cin2" class="btn btn-primary">Inning 2</button>
-                                    <button id="cin3" class="btn btn-primary">Inning 3</button>
-                                    <button id="cin4" class="btn btn-primary">Inning 4</button>
-                                    <button id="cod1" class="btn btn-primary">One Day 1</button>
-                                    <button id="cod2" class="btn btn-primary">One Day 2</button>
                                 </div>
                             </div>
                         </div>
