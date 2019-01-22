@@ -1,31 +1,23 @@
 var db = firebase.database();
 
-var panelInning;
+function addWides(m){
+  db.ref('current').once('value').then(function(snap){
+    var cIn = snap.val();
+    db.ref('extras/'+ cIn + '/wides').once('value').then(function(s){
+      var w = s.val();
+      w += m;
+      db.ref('extras/'+ cIn + '/wides').set(w);
+      console.log(w);
+    })
+  })
+}
 
-var update = {
-  addWides: function(pi, m){
 
-  },
-  addNoBalls: function(m){
 
-  },
-  addBuys: function(m){
 
-  },
-  addLegBuys: function(m){
-
-  },
-  markCompleated: function(i){
-
-  },
-  markCurrent: function(i){
-
-  },
-  inningLead: function(s){
-
-  },
-  setPanelIn: function(i){
-    panelInning = i;
-    console.log(i)
-  }
+var rad = document.getElementsByName('in');
+for(var i = 0; i < rad.length; i++) {
+    rad[i].addEventListener('change', function() {
+        db.ref('current').set(this.value);
+    });
 }
